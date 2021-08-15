@@ -1,3 +1,3 @@
 # computer_science
 
-Repository with implementations of computer science concepts and topics.
+Collection of computer science libraries and executables written in C.
