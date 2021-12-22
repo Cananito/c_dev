@@ -5,6 +5,6 @@ set(CMAKE_C_FLAGS "\
 -Wextra \
 -Werror \
 -Wmissing-prototypes \
--Wnullable-to-nonnull-conversion
+-Wnullable-to-nonnull-conversion \
 ")
 project(computer_science)
