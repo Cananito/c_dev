@@ -8,3 +8,4 @@ set(CMAKE_C_FLAGS "\
 -Wnullable-to-nonnull-conversion \
 ")
 project(computer_science)
+add_subdirectory(data_structures)
