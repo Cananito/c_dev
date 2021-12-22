@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-// TODO: Add nullability annotations here and in the header.
+_Pragma("clang assume_nonnull begin")
 
 struct Queue_r {
   // TODO: Change to an "ArrayList_r" or something for storage.
@@ -30,7 +30,7 @@ int Queue_r_count(Queue_r *queue) {
   return queue->count;
 }
 
-void *Queue_r_peek(Queue_r *queue) {
+void * _Nullable Queue_r_peek(Queue_r *queue) {
   return *(queue->storage + 0);
 }
 
@@ -42,7 +42,7 @@ void Queue_r_enqueue(Queue_r *queue, void *element) {
   // TODO: Increase storage size if needed.
 }
 
-Queue_r *Queue_r_dequeue(Queue_r *queue) {
+void * _Nullable Queue_r_dequeue(Queue_r *queue) {
   void *element = *(queue->storage + 0);
   // TODO: Create new storage without the first element.
   queue->count--;
@@ -51,3 +51,5 @@ Queue_r *Queue_r_dequeue(Queue_r *queue) {
 
   return element;
 }
+
+_Pragma("clang assume_nonnull end")
