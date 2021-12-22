@@ -1,1 +1,5 @@
-# TODO: Set it up!
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+BasedOnStyle: Google
+
+# TODO: Finish setting it up!
