@@ -14,3 +14,4 @@ set(CMAKE_C_FLAGS "\
 project(computer_science)
 
 add_subdirectory(data_structures)
+add_subdirectory(unit_testing)
