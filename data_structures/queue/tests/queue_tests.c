@@ -7,7 +7,7 @@
 _Pragma("clang assume_nonnull begin")
 
 static void test_queue() {
-  Queue_r *queue = Queue_r_new();
+  Queue_r* queue = Queue_r_new();
   assert_true(Queue_r_count(queue) == 0, "Queue not empty.");
 
   Queue_r_enqueue(queue, "a");
