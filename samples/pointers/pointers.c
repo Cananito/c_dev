@@ -8,7 +8,7 @@ int main(void) {
   printf("x: %d\n", x);
   printf("---\n");
 
-  int *y = &x;
+  int* y = &x;
   // Address of y.
   printf("&y: %p\n", &y);
   // Value of y -> the address of x.
@@ -17,7 +17,7 @@ int main(void) {
   printf("*y: %d\n", *y);
   printf("---\n");
 
-  int **z = &y;
+  int** z = &y;
   // Address of z.
   printf("&z: %p\n", &z);
   // Value of z -> the address of y.

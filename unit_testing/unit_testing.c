@@ -5,7 +5,7 @@
 
 _Pragma("clang assume_nonnull begin")
 
-void assert_true(int condition_result, char *failure_message) {
+void assert_true(int condition_result, char* failure_message) {
   if (condition_result != 1) {
     printf("%s\n", failure_message);
     exit(1);
