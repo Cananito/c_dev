@@ -11,6 +11,7 @@ struct Queue_r {
   void** storage;
   int storage_size;
   int count;
+  int first_element_index;
 };
 
 Queue_r* Queue_r_new(void) {
@@ -20,6 +21,7 @@ Queue_r* Queue_r_new(void) {
   q->storage = malloc(storage_size * sizeof(void*));
   q->storage_size = storage_size;
   q->count = 0;
+  q->first_element_index = 0;
   return q;
 }
 
@@ -52,9 +54,10 @@ void* _Nullable Queue_r_dequeue(Queue_r* queue) {
     return (void*)0;
   }
 
-  void* element = queue->storage[0];
-  // TODO: Create new storage without the first element.
+  int first_element_index = queue->first_element_index;
+  void* element = queue->storage[first_element_index];
   queue->count--;
+  queue->first_element_index++;
 
   // TODO: Decrease storage size if needed.
 
