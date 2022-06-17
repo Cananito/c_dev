@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(void) {
+void StackPointers(void) {
   int x = 7;
   // Address of x.
   printf("&x: %p\n", &x);
@@ -28,5 +29,44 @@ int main(void) {
   printf("**z: %d\n", **z);
   printf("---\n");
 
+}
+
+void HeapPointers(void) {
+  // Assign with derefence syntax, allocating with malloc.
+  int a = 1;
+  int* p1 = malloc(sizeof(int));
+  *p1 = a;
+  printf("a: %d, *p1: %d, p1[0]: %d, *(p1 + 0): %d\n", a, *p1, p1[0], *(p1 + 0));
+  printf("---\n");
+  free(p1);
+
+  // Assign with subscript syntax, allocating with malloc.
+  int b = 2;
+  int* p2 = malloc(sizeof(int));
+  p2[0] = b;
+  printf("b: %d, *p2: %d, p2[0]: %d, *(p2 + 0): %d\n", b, *p2, p2[0], *(p2 + 0));
+  printf("---\n");
+  free(p2);
+
+  // Assign with subscript syntax, allocating with calloc.
+  int c = 3;
+  int* p3 = calloc(1, sizeof(int));
+  p3[0] = c;
+  printf("c: %d, *p3: %d, p3[0]: %d, *(p3 + 0): %d\n", c, *p3, p3[0], *(p3 + 0));
+  printf("---\n");
+  free(p3);
+
+  // Assign with pointer offset syntax, allocating with calloc.
+  int d = 4;
+  int* p4 = calloc(1, sizeof(int));
+  *(p4 + 0) = d;
+  printf("d: %d, *p4: %d, p4[0]: %d, *(p4 + 0): %d\n", d, *p4, p4[0], *(p4 + 0));
+  printf("---\n");
+  free(p3);
+}
+
+int main(void) {
+  StackPointers();
+  HeapPointers();
   return 0;
 }
