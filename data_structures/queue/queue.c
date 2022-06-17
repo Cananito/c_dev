@@ -36,12 +36,12 @@ void* _Nullable Queue_r_peek(Queue_r* queue) {
   if (queue->count == 0) {
     return (void*)0;
   }
-  return *(queue->storage + 0);
+  return queue->storage[0];
 }
 
 void Queue_r_enqueue(Queue_r* queue, void* element) {
   int current_count = queue->count;
-  *(queue->storage + current_count) = element;
+  queue->storage[current_count] = element;
   queue->count++;
 
   // TODO: Increase storage size if needed.
@@ -52,7 +52,7 @@ void* _Nullable Queue_r_dequeue(Queue_r* queue) {
     return (void*)0;
   }
 
-  void* element = *(queue->storage + 0);
+  void* element = queue->storage[0];
   // TODO: Create new storage without the first element.
   queue->count--;
 
