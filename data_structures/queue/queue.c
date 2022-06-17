@@ -31,6 +31,9 @@ int Queue_r_count(Queue_r* queue) {
 }
 
 void* _Nullable Queue_r_peek(Queue_r* queue) {
+  if (queue->count == 0) {
+    return (void*)0;
+  }
   return *(queue->storage + 0);
 }
 
