@@ -63,6 +63,9 @@ void HeapPointers(void) {
   printf("d: %d, *p4: %d, p4[0]: %d, *(p4 + 0): %d\n", d, *p4, p4[0], *(p4 + 0));
   printf("---\n");
   free(p3);
+
+  // Note: calloc initializes each element (thus slower than malloc), plus no
+  // need to multiply to determine total size.
 }
 
 int main(void) {
