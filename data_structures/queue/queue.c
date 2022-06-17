@@ -4,6 +4,8 @@
 
 _Pragma("clang assume_nonnull begin")
 
+// TODO: Make all functions thread safe.
+
 struct Queue_r {
   // TODO: Change to an "ArrayList_r" or something for storage.
   void** storage;
@@ -15,7 +17,7 @@ Queue_r* Queue_r_new(void) {
   Queue_r* q = malloc(sizeof(Queue_r));
   int storage_size = 4;
   // TODO: Delay allocation until first enqueue?
-  q->storage = calloc(storage_size, sizeof(void*));
+  q->storage = malloc(storage_size * sizeof(void*));
   q->storage_size = storage_size;
   q->count = 0;
   return q;
@@ -46,6 +48,10 @@ void Queue_r_enqueue(Queue_r* queue, void* element) {
 }
 
 void* _Nullable Queue_r_dequeue(Queue_r* queue) {
+  if (queue->count == 0) {
+    return (void*)0;
+  }
+
   void* element = *(queue->storage + 0);
   // TODO: Create new storage without the first element.
   queue->count--;
