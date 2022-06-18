@@ -6,7 +6,7 @@
 
 _Pragma("clang assume_nonnull begin")
 
-static void test_queue() {
+static void test_queue(void) {
   Queue_r* queue = Queue_r_new();
   assert_true(Queue_r_count(queue) == 0, "Queue not empty.");
   assert_true(Queue_r_peek(queue) == 0, "Queue peek didn't return nil.");
