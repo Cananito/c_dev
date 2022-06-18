@@ -1,0 +1,3 @@
+add_executable(array_deque_tests array_deque_tests.c)
+
+target_link_libraries(array_deque_tests array_deque unit_testing)
