@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void StackPointers(void) {
+static void StackPointers(void) {
   int x = 7;
   // Address of x.
   printf("&x: %p\n", &x);
@@ -31,7 +31,7 @@ void StackPointers(void) {
 
 }
 
-void HeapPointers(void) {
+static void HeapPointers(void) {
   // Assign with derefence syntax, allocating with malloc.
   int a = 1;
   int* p1 = malloc(sizeof(int));
