@@ -68,8 +68,21 @@ static void HeapPointers(void) {
   // need to multiply to determine total size.
 }
 
+static void HeapDoublePointers(void) {
+  int a = 1;
+  int** pp = malloc(sizeof(int));
+  *pp = &a; // Point to the address of a.
+  printf("**pp: %d\n", **pp);
+  printf("   a: %d\n", a);
+  **pp = 2; // Change the value of a.
+  printf("**pp: %d\n", **pp);
+  printf("   a: %d\n", a);
+  printf("---\n");
+}
+
 int main(void) {
   StackPointers();
   HeapPointers();
+  HeapDoublePointers();
   return 0;
 }
