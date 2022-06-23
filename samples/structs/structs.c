@@ -14,7 +14,7 @@ void PassByValue(struct MyStruct pbv) {
 
 void PassByReference(struct MyStruct* pbr) {
   printf("pbr.value before: %d\n", pbr->value);
-  pbr->value = 4;
+  pbr->value = 4; // Same as `(*pbr).value`.
   printf("pbr.value after: %d\n", pbr->value);
 }
 
