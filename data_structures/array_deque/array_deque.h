@@ -1,5 +1,9 @@
 _Pragma("clang assume_nonnull begin")
 
+// TODO: Rename to something more general.
+
+// TODO: Figure out immutability.
+
 /** Declaration of the array deque type. */
 typedef struct ArrayDeque_r ArrayDeque_r;
 

@@ -1,5 +1,7 @@
 _Pragma("clang assume_nonnull begin")
 
+// TODO: Figure out immutability.
+
 /** Declaration of the queue type. */
 typedef struct Queue_r Queue_r;
 
