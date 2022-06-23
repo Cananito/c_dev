@@ -80,13 +80,32 @@ static void ConstantPointerToConstant(void) {
   printf("---\n");
 }
 
+static void ConstantPointerToConstantPointerToConstant(void) {
+  printf("---Constant pointer to constant pointer to constant---\n");
+
+  int a = 1;
+  int const* p1 = &a;
+
+  int const* const* const pp = &p1; // Same as `?`.
+  printf("*pp: %p\n", *pp);
+  printf("**pp: %d\n", **pp);
+
+  int b = 2;
+  int const* p2 = &a;
+  // pp = &p2; // Can't re-assign pp.
+  // *pp = &b; // Can't do.
+  // **pp = 3; // Can't do.
+
+  printf("---\n");
+}
+
 static void PointerToVariableDeclaredAsConst(void) {
   printf("---Pointer to variable declared as const---\n");
   const int a = 1;
-  int* const p = &a;
+  int* p = &a; // Compiler warning (-Wincompatible-pointer-types-discards-qualifiers).
   printf("*p: %d\n", *p);
   printf(" a: %d\n", a);
-  *p = 2; // Compiler warning (-Wincompatible-pointer-types-discards-qualifiers).
+  *p = 2; // Shady!
   printf("*p: %d\n", *p); // 2 (changes)
   printf(" a: %d\n", a); // 1 (doesn't change)
   // Clang behavior. Unclear whether all compilers behave the same way.
@@ -100,6 +119,7 @@ int main(void) {
   PointerToConstant();
   ConstantPointerToVariable();
   ConstantPointerToConstant();
+  ConstantPointerToConstantPointerToConstant();
 
   PointerToVariableDeclaredAsConst();
 
