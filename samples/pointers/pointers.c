@@ -78,6 +78,7 @@ static void HeapDoublePointers(void) {
   printf("**pp: %d\n", **pp);
   printf("   a: %d\n", a);
   printf("---\n");
+  free(pp);
 }
 
 int main(void) {
