@@ -86,7 +86,7 @@ static void ConstantPointerToConstantPointerToConstant(void) {
   int a = 1;
   int const* p1 = &a;
 
-  int const* const* const pp = &p1; // Same as `?`.
+  int const* const* const pp = &p1; // Same as `const int* const* const pp`.
   printf("*pp: %p\n", *pp);
   printf("**pp: %d\n", **pp);
 
@@ -95,6 +95,48 @@ static void ConstantPointerToConstantPointerToConstant(void) {
   // pp = &p2; // Can't re-assign pp.
   // *pp = &b; // Can't do.
   // **pp = 3; // Can't do.
+
+  printf("---\n");
+}
+
+static void ConstantPointerToPointerToConstant(void) {
+  printf("---Constant pointer to pointer to constant---\n");
+
+  int a = 1;
+  int* p1 = &a;
+
+  int* const* const pp = &p1; // Same as `int* const* const pp`.
+  printf("*pp: %p\n", *pp);
+  printf("**pp: %d\n", **pp);
+
+  int b = 2;
+  int const* p2 = &a;
+  // pp = &p2; // Can't re-assign pp.
+  // *pp = &b; // Can't do.
+  **pp = 3;
+  printf("*pp: %p\n", *pp);
+  printf("**pp: %d\n", **pp);
+
+  printf("---\n");
+}
+
+static void PointerToConstantPointerToConstant(void) {
+  printf("---Pointer to constant pointer to constant---\n");
+
+  int a = 1;
+  int const* p1 = &a;
+
+  int const** const pp = &p1; // Same as `const int** const pp`.
+  printf("*pp: %p\n", *pp);
+  printf("**pp: %d\n", **pp);
+
+  int b = 2;
+  int const* p2 = &a;
+  // pp = &p2; // Can't re-assign pp.
+  *pp = &b;
+  // **pp = 3; // Can't do.
+  printf("*pp: %p\n", *pp);
+  printf("**pp: %d\n", **pp);
 
   printf("---\n");
 }
@@ -119,7 +161,10 @@ int main(void) {
   PointerToConstant();
   ConstantPointerToVariable();
   ConstantPointerToConstant();
+
   ConstantPointerToConstantPointerToConstant();
+  ConstantPointerToPointerToConstant();
+  PointerToConstantPointerToConstant();
 
   PointerToVariableDeclaredAsConst();
 
