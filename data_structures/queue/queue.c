@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-_Pragma("clang assume_nonnull begin")
+// TODO: Add NULL checks.
 
 // TODO: Make all functions thread safe.
 
@@ -34,7 +34,7 @@ int Queue_r_count(Queue_r* queue) {
   return queue->count;
 }
 
-void* _Nullable Queue_r_peek(Queue_r* queue) {
+void* Queue_r_peek(Queue_r* queue) {
   if (queue->count == 0) {
     return (void*)0;
   }
@@ -49,7 +49,7 @@ void Queue_r_enqueue(Queue_r* queue, void* element) {
   // TODO: Increase storage size if needed.
 }
 
-void* _Nullable Queue_r_dequeue(Queue_r* queue) {
+void* Queue_r_dequeue(Queue_r* queue) {
   if (queue->count == 0) {
     return (void*)0;
   }
@@ -63,5 +63,3 @@ void* _Nullable Queue_r_dequeue(Queue_r* queue) {
 
   return element;
 }
-
-_Pragma("clang assume_nonnull end")

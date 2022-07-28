@@ -3,13 +3,10 @@
 
 #include "unit_testing.h"
 
-_Pragma("clang assume_nonnull begin")
-
 void assert_true(int condition_result, char* failure_message) {
   if (condition_result != 1) {
+    // TODO: Check that failure_message isn't NULL.
     printf("%s\n", failure_message);
     exit(1);
   }
 }
-
-_Pragma("clang assume_nonnull end")

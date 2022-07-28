@@ -1,5 +1,3 @@
-_Pragma("clang assume_nonnull begin")
-
 // TODO: Rename to something more general.
 
 // TODO: Figure out immutability.
@@ -17,10 +15,10 @@ extern void ArrayDeque_r_free(ArrayDeque_r* array_deque);
 extern int ArrayDeque_r_count(ArrayDeque_r* array_deque);
 
 /** Returns the element at a given index in the array deque, if it exists. */
-extern void* _Nullable ArrayDeque_r_get(ArrayDeque_r* array_deque, int index);
+extern void* ArrayDeque_r_get(ArrayDeque_r* array_deque, int index);
 
 /** Returns the last element in the array deque, if it exists. */
-extern void* _Nullable ArrayDeque_r_get_last(ArrayDeque_r* array_deque);
+extern void* ArrayDeque_r_get_last(ArrayDeque_r* array_deque);
 
 /** Adds the passed-in element to the beginning of the array deque. */
 extern void ArrayDeque_r_prepend(ArrayDeque_r* array_deque, void* element);
@@ -29,9 +27,7 @@ extern void ArrayDeque_r_prepend(ArrayDeque_r* array_deque, void* element);
 extern void ArrayDeque_r_append(ArrayDeque_r* array_deque, void* element);
 
 /** Removes the first element from the array deque and returns it. */
-extern void* _Nullable ArrayDeque_r_remove_first(ArrayDeque_r* array_deque);
+extern void* ArrayDeque_r_remove_first(ArrayDeque_r* array_deque);
 
 /** Removes the last element from the array deque and returns it. */
-extern void* _Nullable ArrayDeque_r_remove_last(ArrayDeque_r* array_deque);
-
-_Pragma("clang assume_nonnull end")
+extern void* ArrayDeque_r_remove_last(ArrayDeque_r* array_deque);

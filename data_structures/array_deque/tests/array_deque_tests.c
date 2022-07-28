@@ -4,8 +4,6 @@
 #include "array_deque.h"
 #include "unit_testing.h"
 
-_Pragma("clang assume_nonnull begin")
-
 /*
 static void test_array_deque() {
   ArrayDeque_r* array_deque = ArrayDeque_r_new();
@@ -107,5 +105,3 @@ int main() {
   printf("Tests succeeded!\n");
   return 0;
 }
-
-_Pragma("clang assume_nonnull end")

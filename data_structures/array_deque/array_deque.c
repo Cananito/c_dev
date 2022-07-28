@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-_Pragma("clang assume_nonnull begin")
+// TODO: Add NULL checks.
 
 // TODO: Make all functions thread safe.
 
@@ -33,7 +33,7 @@ int ArrayDeque_r_count(ArrayDeque_r* array_deque) {
   return array_deque->count;
 }
 
-void* _Nullable ArrayDeque_r_get(ArrayDeque_r* array_deque, int index) {
+void* ArrayDeque_r_get(ArrayDeque_r* array_deque, int index) {
   // TODO: Do bounds check.
   if (array_deque->count == 0) {
     return (void*)0;
@@ -41,7 +41,7 @@ void* _Nullable ArrayDeque_r_get(ArrayDeque_r* array_deque, int index) {
   return array_deque->storage[index];
  }
 
-void* _Nullable ArrayDeque_r_get_last(ArrayDeque_r* array_deque) {
+void* ArrayDeque_r_get_last(ArrayDeque_r* array_deque) {
   if (array_deque->count == 0) {
     return (void*)0;
   }
@@ -70,7 +70,7 @@ void ArrayDeque_r_append(ArrayDeque_r* array_deque, void* element) {
   // TODO: Increase storage size if needed.
 }
 
-void* _Nullable ArrayDeque_r_remove_first(ArrayDeque_r* array_deque) {
+void* ArrayDeque_r_remove_first(ArrayDeque_r* array_deque) {
   if (array_deque->count == 0) {
     return (void*)0;
   }
@@ -85,7 +85,7 @@ void* _Nullable ArrayDeque_r_remove_first(ArrayDeque_r* array_deque) {
   return element;
 }
 
-void* _Nullable ArrayDeque_r_remove_last(ArrayDeque_r* array_deque) {
+void* ArrayDeque_r_remove_last(ArrayDeque_r* array_deque) {
   if (array_deque->count == 0) {
     return (void*)0;
   }
@@ -98,5 +98,3 @@ void* _Nullable ArrayDeque_r_remove_last(ArrayDeque_r* array_deque) {
 
   return element;
 }
-
-_Pragma("clang assume_nonnull end")
