@@ -5,8 +5,12 @@
 
 void assert_true(int condition_result, char* failure_message) {
   if (condition_result != 1) {
-    // TODO: Check that failure_message isn't NULL.
-    printf("%s\n", failure_message);
+    if (failure_message == NULL) {
+      printf("Assert failed! Specify `failure_message` for better diagnostics."
+             "\n");
+    } else {
+      printf("%s\n", failure_message);
+    }
     exit(1);
   }
 }
