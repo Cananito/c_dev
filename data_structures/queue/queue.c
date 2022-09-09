@@ -14,6 +14,8 @@ struct Queue_r {
   int first_element_index;
 };
 
+#pragma mark - Public Functions
+
 Queue_r* Queue_r_new(void) {
   Queue_r* q = malloc(sizeof(Queue_r));
   int storage_size = 4;
