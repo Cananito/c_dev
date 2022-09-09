@@ -62,7 +62,7 @@ static void test_add_and_remove_elements(void) {
               "ArrayDeque remove first not 0");
   assert_true(ArrayDeque_r_count(array_deque) == 2, "ArrayDeque count not 2.");
 
-  assert_true(*(int*)ArrayDeque_r_remove_first(array_deque) == 2,
+  assert_true(*(int*)ArrayDeque_r_remove_last(array_deque) == 2,
               "ArrayDeque remove first not 2");
   assert_true(ArrayDeque_r_count(array_deque) == 1, "ArrayDeque count not 1.");
 
