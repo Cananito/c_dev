@@ -4,34 +4,6 @@
 #include "array_deque.h"
 #include "unit_testing.h"
 
-/*
-static void test_array_deque() {
-  ArrayDeque_r* array_deque = ArrayDeque_r_new();
-  assert_true(ArrayDeque_r_count(array_deque) == 0, "ArrayDeque not empty.");
-  assert_true(ArrayDeque_r_peek(array_deque) == 0, "ArrayDeque peek didn't return nil.");
-  assert_true(ArrayDeque_r_dearray_deque(array_deque) == 0, "ArrayDeque dearray_deque didn't return nil.");
-
-  ArrayDeque_r_enarray_deque(array_deque, "a");
-  assert_true(ArrayDeque_r_count(array_deque) == 1, "ArrayDeque count not 1.");
-  assert_true(strcmp(ArrayDeque_r_peek(array_deque), "a") == 0, "ArrayDeque peek not \"a\".");
-
-  ArrayDeque_r_enarray_deque(array_deque, "b");
-  assert_true(ArrayDeque_r_count(array_deque) == 2, "ArrayDeque count not 2.");
-  assert_true(strcmp(ArrayDeque_r_peek(array_deque), "a") == 0, "ArrayDeque peek not \"a\".");
-
-  assert_true(strcmp(ArrayDeque_r_dearray_deque(array_deque), "a") == 0,
-              "ArrayDeque dearray_deque not \"a\".");
-  assert_true(strcmp(ArrayDeque_r_dearray_deque(array_deque), "b") == 0,
-              "ArrayDeque dearray_deque not \"b\".");
-
-  assert_true(ArrayDeque_r_count(array_deque) == 0, "ArrayDeque not empty.");
-  assert_true(ArrayDeque_r_peek(array_deque) == 0, "ArrayDeque peek didn't return nil.");
-  assert_true(ArrayDeque_r_dearray_deque(array_deque) == 0, "ArrayDeque dearray_deque didn't return nil.");
-
-  ArrayDeque_r_free(array_deque);
-}
-*/
-
 static void test_add_and_remove_elements(void) {
   ArrayDeque_r *array_deque = ArrayDeque_r_new();
   assert_true(ArrayDeque_r_count(array_deque) == 0, "ArrayDeque not empty.");
