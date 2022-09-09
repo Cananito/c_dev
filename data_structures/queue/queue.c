@@ -18,7 +18,7 @@ Queue_r* Queue_r_new(void) {
   Queue_r* q = malloc(sizeof(Queue_r));
   int storage_size = 4;
   // TODO: Delay allocation until first enqueue?
-  q->storage = malloc(storage_size * sizeof(void*));
+  q->storage = malloc(storage_size * sizeof(void const*));
   q->storage_size = storage_size;
   q->count = 0;
   q->first_element_index = 0;
@@ -36,7 +36,7 @@ int Queue_r_count(Queue_r const* queue) {
 
 void const* Queue_r_peek(Queue_r const* queue) {
   if (queue->count == 0) {
-    return (void*)0;
+    return (void const*)0;
   }
   return queue->storage[0];
 }
@@ -51,7 +51,7 @@ void Queue_r_enqueue(Queue_r* queue, void const* element) {
 
 void const* Queue_r_dequeue(Queue_r* queue) {
   if (queue->count == 0) {
-    return (void*)0;
+    return (void const*)0;
   }
 
   int first_element_index = queue->first_element_index;
