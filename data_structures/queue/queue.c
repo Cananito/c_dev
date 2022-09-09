@@ -8,7 +8,7 @@
 
 struct Queue_r {
   // TODO: Change to an "ArrayList_r" or something for storage.
-  void** storage;
+  void const** storage;
   int storage_size;
   int count;
   int first_element_index;
@@ -30,18 +30,18 @@ void Queue_r_free(Queue_r* queue) {
   free(queue);
 }
 
-int Queue_r_count(Queue_r* queue) {
+int Queue_r_count(Queue_r const* queue) {
   return queue->count;
 }
 
-void* Queue_r_peek(Queue_r* queue) {
+void const* Queue_r_peek(Queue_r const* queue) {
   if (queue->count == 0) {
     return (void*)0;
   }
   return queue->storage[0];
 }
 
-void Queue_r_enqueue(Queue_r* queue, void* element) {
+void Queue_r_enqueue(Queue_r* queue, void const* element) {
   int current_count = queue->count;
   queue->storage[current_count] = element;
   queue->count++;
@@ -49,13 +49,13 @@ void Queue_r_enqueue(Queue_r* queue, void* element) {
   // TODO: Increase storage size if needed.
 }
 
-void* Queue_r_dequeue(Queue_r* queue) {
+void const* Queue_r_dequeue(Queue_r* queue) {
   if (queue->count == 0) {
     return (void*)0;
   }
 
   int first_element_index = queue->first_element_index;
-  void* element = queue->storage[first_element_index];
+  void const* element = queue->storage[first_element_index];
   queue->count--;
   queue->first_element_index++;
 
