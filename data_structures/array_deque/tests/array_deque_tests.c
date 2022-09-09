@@ -49,8 +49,8 @@ static void test_add_and_remove_elements(void) {
   assert_true(ArrayDeque_r_count(array_deque) == 3, "ArrayDeque count not 3.");
 
   assert_true(ArrayDeque_r_get(array_deque, 0) != 0, "ArrayDequeue get at 0 is nil.");
-  assert_true(ArrayDeque_r_get(array_deque, 1) != 0, "ArrayDequeue get at 0 is nil.");
-  assert_true(ArrayDeque_r_get(array_deque, 2) != 0, "ArrayDequeue get at 0 is nil.");
+  assert_true(ArrayDeque_r_get(array_deque, 1) != 0, "ArrayDequeue get at 1 is nil.");
+  assert_true(ArrayDeque_r_get(array_deque, 2) != 0, "ArrayDequeue get at 2 is nil.");
   assert_true(*(int*)ArrayDeque_r_get(array_deque, 0) == 0,
               "ArrayDeque get at 0 not 0.");
   assert_true(*(int*)ArrayDeque_r_get(array_deque, 1) == 1,
