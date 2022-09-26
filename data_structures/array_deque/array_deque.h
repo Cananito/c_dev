@@ -1,5 +1,7 @@
 // TODO: Rename to something more general.
 
+// TODO: Rename new and free to create and destroy.
+
 /** Declaration of the array deque type. */
 typedef struct ArrayDeque_r ArrayDeque_r;
 

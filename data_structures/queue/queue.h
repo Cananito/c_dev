@@ -1,3 +1,5 @@
+// TODO: Rename new and free to create and destroy.
+
 /** Declaration of the queue type. */
 typedef struct Queue_r Queue_r;
 
