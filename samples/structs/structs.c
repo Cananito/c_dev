@@ -18,6 +18,22 @@ void PassByReference(struct MyStruct* pbr) {
   printf("pbr.value after: %d\n", pbr->value);
 }
 
+void DemonstrateMemoryLayout(void) {
+  struct Something {
+    char first;
+    float second;
+    double third;
+  } s = { .first = 'a', .second = 11111.11111, .third = 11111111111111.11111111111111 };
+  // TODO: Not the values I was expecting. Figure out why.
+  printf("Address of s: %p\n", &s);
+  printf("Address of s.first: %p\n", &(s.first));
+  printf("Address of s.second: %p\n", &(s.second));
+  printf("Address of s.third: %p\n", &(s.third));
+  printf("Value of s.first: %c\n", s.first);
+  printf("Value of s.second: %f\n", s.second);
+  printf("Value of s.third: %lf\n", s.third);
+}
+
 int main(void) {
   struct MyStruct a;
 
@@ -30,6 +46,9 @@ int main(void) {
   printf("a.value before pass by reference: %d\n", a.value);
   PassByReference(&a);
   printf("a.value after pass by reference: %d\n", a.value);
+
+  printf("---\n");
+  DemonstrateMemoryLayout();
 
   return 0;
 }
