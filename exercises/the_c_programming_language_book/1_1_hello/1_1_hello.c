@@ -4,6 +4,7 @@
 // On macOS, using clang:
 // $ clang 1_1_hello.c
 // $ ./a.out
+// Outputs: hello, world
 
 // Include information about standard library.
 #include <stdio.h>
