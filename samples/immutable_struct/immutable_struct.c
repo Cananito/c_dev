@@ -11,7 +11,7 @@ struct Person {
   int8_t const age;
   char const* const name;
   // TODO: Convert these 2 into a List_r.
-  int8_t const favoriteNumbers;
+  int8_t const* favoriteNumbers;
   size_t const favoriteNumbersCount;
 };
 
