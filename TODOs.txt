@@ -1,0 +1,11 @@
+* Switch to size_t instead of int when applicable.
+* Figure out if ArrayDeque needs realloc or malloc for storage resizing.
+* Switch from malloc to calloc?
+  - Slower but will prevent getting non-0 values at the begining.
+* Change ArrayDeque storage to be last field so I can do single allocation?
+* Switch from int to uintx_t from stdint.h?
+* Make a no pointer/malloc version of data structures.
+* Adopt IWYU.
+  - https://github.com/include-what-you-use/include-what-you-use
+  - https://cmake.org/cmake/help/latest/prop_tgt/LANG_INCLUDE_WHAT_YOU_USE.html
+* Who is reponsible for freeing elements stored in ArrayDeque?
