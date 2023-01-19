@@ -5,6 +5,7 @@
 * Change ArrayDeque storage to be last field so I can do single allocation?
 * Switch from int to uintx_t from stdint.h?
 * Make a no pointer/malloc version of data structures.
+  - Either stack based or using handles (IDs).
 * Adopt IWYU.
   - https://github.com/include-what-you-use/include-what-you-use
   - https://cmake.org/cmake/help/latest/prop_tgt/LANG_INCLUDE_WHAT_YOU_USE.html
