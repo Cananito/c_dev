@@ -2,7 +2,7 @@
 // string contains \c, where c is some character not listed above.
 
 // On macOS, using clang:
-// $ clang 1_1_hello.c
+// $ clang 1_2_hello_backslash_c.c
 // $ ./a.out
 // Outputs: hello, cworld
 
