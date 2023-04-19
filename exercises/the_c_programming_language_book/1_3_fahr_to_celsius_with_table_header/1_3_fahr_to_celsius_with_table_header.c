@@ -12,10 +12,10 @@ main() {
   int const upper = 300;
   int const step = 20;
   float fahr = lower;
-  printf("Fahrenheit - Celsius\n");
+  printf("Fahrenheit Celsius\n");
   while (fahr <= upper ) {
     float const celsius = (5.0 / 9.0) * (fahr - 32.0);
-    printf("%10.0f - %7.1f\n", fahr, celsius);
+    printf("%10.0f %7.1f\n", fahr, celsius);
     fahr = fahr + step;
   }
 }
