@@ -14,7 +14,7 @@ main() {
   float fahr = lower;
   printf("Fahrenheit Celsius\n");
   while (fahr <= upper ) {
-    float const celsius = (5.0 / 9.0) * (fahr - 32.0);
+    float const celsius = (fahr - 32.0) * (5.0 / 9.0) ;
     printf("%10.0f %7.1f\n", fahr, celsius);
     fahr = fahr + step;
   }
