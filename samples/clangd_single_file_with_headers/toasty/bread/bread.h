@@ -1,0 +1,3 @@
+struct Bread {
+  int slices;
+};
