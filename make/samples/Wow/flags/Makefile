@@ -1,0 +1,1 @@
+flags=-Werror -Wall
