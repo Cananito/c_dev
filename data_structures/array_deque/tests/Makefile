@@ -2,11 +2,11 @@ include $(CURDIR)/flags/Makefile
 VPATH=build
 outputdir=build
 
-build: unit_testing.o array_deque.o array_deque_tests.o 
-	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/array_deque.o $(outputdir)/array_deque_tests.o -o $(outputdir)/array_deque_tests
-
 run: build
 	./$(outputdir)/array_deque_tests
+
+build: unit_testing.o array_deque.o array_deque_tests.o 
+	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/array_deque.o $(outputdir)/array_deque_tests.o -o $(outputdir)/array_deque_tests
 
 clean:
 	rm $(outputdir)/unit_testing.o

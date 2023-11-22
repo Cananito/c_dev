@@ -2,11 +2,11 @@ include $(CURDIR)/flags/Makefile
 VPATH=build
 outputdir=build
 
-build: unit_testing.o queue.o queue_tests.o 
-	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/queue.o $(outputdir)/queue_tests.o -o $(outputdir)/queue_tests
-
 run: build
 	./$(outputdir)/queue_tests
+
+build: unit_testing.o queue.o queue_tests.o 
+	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/queue.o $(outputdir)/queue_tests.o -o $(outputdir)/queue_tests
 
 clean:
 	rm $(outputdir)/unit_testing.o
