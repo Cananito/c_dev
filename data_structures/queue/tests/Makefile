@@ -1,9 +1,10 @@
 include flags/Makefile
-outputdir=out
+outputdir=build
 
 run: build
 	./$(outputdir)/queue_tests
 
+.PHONY: build
 build:
 	mkdir -p $(outputdir)
 	clang $(CFLAGS) -c unit_testing/unit_testing.c -o $(outputdir)/unit_testing.o

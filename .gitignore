@@ -1,4 +1,4 @@
 .DS_Store
 .cache/
-out/
+build/
 compile_commands.json
