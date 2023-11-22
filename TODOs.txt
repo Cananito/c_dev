@@ -12,3 +12,4 @@
 * Who is reponsible for freeing elements stored in ArrayDeque?
 * Code all these allocators:
   - https://www.gingerbill.org/series/memory-allocation-strategies/
+* Re-structure Makefiles to allow for caching.

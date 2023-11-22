@@ -1,1 +1,1 @@
-flags=-Wall -Wextra -Werror -Wmissing-prototypes -Wnullable-to-nonnull-conversion
+CFLAGS=-Wall -Wextra -Werror -Wmissing-prototypes -Wnullable-to-nonnull-conversion
