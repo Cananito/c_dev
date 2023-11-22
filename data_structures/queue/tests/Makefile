@@ -1,12 +1,11 @@
-include $(CURDIR)/flags/Makefile
-VPATH=out
+include flags/Makefile
 outputdir=out
+VPATH=$(outputdir)
 
-run: build
+run: $(outputdir)/queue_tests
 	./$(outputdir)/queue_tests
 
-build: unit_testing.o queue.o queue_tests.o 
-	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/queue.o $(outputdir)/queue_tests.o -o $(outputdir)/queue_tests
+build: $(outputdir)/queue_tests
 
 clean:
 	rm $(outputdir)/unit_testing.o
@@ -14,14 +13,17 @@ clean:
 	rm $(outputdir)/queue_tests.o
 	rm $(outputdir)/queue_tests
 
-unit_testing.o: out
+$(outputdir)/queue_tests: $(outputdir)/unit_testing.o $(outputdir)/queue.o $(outputdir)/queue_tests.o
+	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/queue.o $(outputdir)/queue_tests.o -o $(outputdir)/queue_tests
+
+$(outputdir)/unit_testing.o: $(CURDIR)/unit_testing/unit_testing.c out
 	clang $(flags) -c $(CURDIR)/unit_testing/unit_testing.c -o $(outputdir)/unit_testing.o
 
-queue.o: out
+$(outputdir)/queue.o: $(CURDIR)/data_structures/queue/queue.c out
 	clang $(flags) -c $(CURDIR)/data_structures/queue/queue.c -o $(outputdir)/queue.o
 
-queue_tests.o: out
-	clang $(flags) -c $(CURDIR)/data_structures/queue/tests/queue_tests.c -I $(CURDIR)/data_structures/queue/ -I $(CURDIR)/unit_testing/ -o $(outputdir)/queue_tests.o
+$(outputdir)/queue_tests.o: $(CURDIR)/data_structures/queue/tests/queue_tests.c out
+	clang $(flags) -c $(CURDIR)/data_structures/queue/tests/queue_tests.c -I data_structures/queue/ -I unit_testing/ -o $(outputdir)/queue_tests.o
 
 out:
 	mkdir -p $(outputdir)
