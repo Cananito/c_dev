@@ -4,34 +4,29 @@ Collection of computer science libraries and executables written in C.
 
 ## Requirements
 
-* A C compiler.
-* CMake.
+* Clang.
 
 ## Build Instructions
 
 1. `cd` into the root of this repository.
 1. If there's no `build` directory, `mkdir build`.
-1. `cd build`.
-1. `cmake ..`. This will populate the build directory with a Makefile and compile_commands.json.
-1. Optionally, to enable debugging, `cmake -DCMAKE_BUILD_TYPE=Debug ..`.
-1. `cmake --build .`. This will build the code.
+1. `make -f <path to Makefile> build` to build whatever test or program.
 
 ## Run Instructions
 
-1. Follow the [build instructions](#build-instructions).
-1. Find the executable and run it. Example: `./data_structures/queue/tests/queue_tests`
+1. `cd` into the root of this repository.
+1. If there's no `build` directory, `mkdir build`.
+1. `make -f <path to Makefile>` to run whatever test or program.
 
 ## Debug Instructions
 
-1. Follow the [build instructions](#build-instructions), including the optional step.
-1. Find the executable and pass it to LLDB. Example: `lldb data_structures/queue/tests/queue_tests`
+1. Follow the [build instructions](#build-instructions).
+1. Find the executable in the `build` directory and pass it to LLDB. Example: `lldb build/queue_tests`
 
 ## Clean Instructions
 
-1. From the `build` directory, run `cmake --build . --target clean`
+1. `make -f <path to Makefile> clean` to clean whatever test or program.
 
 ## clangd Set-Up
 
-1. Follow the [build instructions](#build-instructions).
-1. `cd` into the root of this repository.
-1. `ln -s build/compile_commands.json compile_commands.json`.
+TODO
