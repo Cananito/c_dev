@@ -1,11 +1,11 @@
 include $(CURDIR)/flags/Makefile
-VPATH=out
 outputdir=out
+VPATH=$(outputdir)
 
-run: build
+run: $(outputdir)/array_deque_tests
 	./$(outputdir)/array_deque_tests
 
-build: unit_testing.o array_deque.o array_deque_tests.o 
+$(outputdir)/array_deque_tests: $(outputdir)/unit_testing.o $(outputdir)/array_deque.o $(outputdir)/array_deque_tests.o
 	clang $(flags) $(outputdir)/unit_testing.o $(outputdir)/array_deque.o $(outputdir)/array_deque_tests.o -o $(outputdir)/array_deque_tests
 
 clean:
@@ -14,14 +14,14 @@ clean:
 	rm $(outputdir)/array_deque_tests.o
 	rm $(outputdir)/array_deque_tests
 
-unit_testing.o: out
-	clang $(flags) -c $(CURDIR)/unit_testing/unit_testing.c -o $(outputdir)/unit_testing.o
+$(outputdir)/unit_testing.o: unit_testing/unit_testing.c out
+	clang $(flags) -c unit_testing/unit_testing.c -o $(outputdir)/unit_testing.o
 
-array_deque.o: out
-	clang $(flags) -c $(CURDIR)/data_structures/array_deque/array_deque.c -o $(outputdir)/array_deque.o
+$(outputdir)/array_deque.o: data_structures/array_deque/array_deque.c out
+	clang $(flags) -c data_structures/array_deque/array_deque.c -o $(outputdir)/array_deque.o
 
-array_deque_tests.o: out
-	clang $(flags) -c $(CURDIR)/data_structures/array_deque/tests/array_deque_tests.c -I $(CURDIR)/data_structures/array_deque/ -I $(CURDIR)/unit_testing/ -o $(outputdir)/array_deque_tests.o
+$(outputdir)/array_deque_tests.o: data_structures/array_deque/tests/array_deque_tests.c out
+	clang $(flags) -c data_structures/array_deque/tests/array_deque_tests.c -I data_structures/array_deque/ -I unit_testing/ -o $(outputdir)/array_deque_tests.o
 
 out:
 	mkdir -p $(outputdir)
