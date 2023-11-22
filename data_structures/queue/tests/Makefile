@@ -1,6 +1,6 @@
 include $(CURDIR)/flags/Makefile
-VPATH=build
-outputdir=build
+VPATH=out
+outputdir=out
 
 run: build
 	./$(outputdir)/queue_tests
@@ -14,11 +14,14 @@ clean:
 	rm $(outputdir)/queue_tests.o
 	rm $(outputdir)/queue_tests
 
-unit_testing.o:
+unit_testing.o: out
 	clang $(flags) -c $(CURDIR)/unit_testing/unit_testing.c -o $(outputdir)/unit_testing.o
 
-queue.o:
+queue.o: out
 	clang $(flags) -c $(CURDIR)/data_structures/queue/queue.c -o $(outputdir)/queue.o
 
-queue_tests.o:
+queue_tests.o: out
 	clang $(flags) -c $(CURDIR)/data_structures/queue/tests/queue_tests.c -I $(CURDIR)/data_structures/queue/ -I $(CURDIR)/unit_testing/ -o $(outputdir)/queue_tests.o
+
+out:
+	mkdir -p $(outputdir)

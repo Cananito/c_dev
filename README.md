@@ -9,13 +9,11 @@ Collection of computer science libraries and executables written in C.
 ## Build Instructions
 
 1. `cd` into the root of this repository.
-1. If there's no `build` directory, `mkdir build`.
 1. `make -f <path to Makefile> build` to build whatever test or program.
 
 ## Run Instructions
 
 1. `cd` into the root of this repository.
-1. If there's no `build` directory, `mkdir build`.
 1. `make -f <path to Makefile>` to run whatever test or program.
 
 ## Debug Instructions
