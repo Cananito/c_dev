@@ -1,3 +1,5 @@
+* Refactor data structures so they're implementations that require typed layers.
+* Create "map" data structure (associative array, without hashing).
 * Switch to size_t instead of int when applicable.
 * Figure out if ArrayDeque needs realloc or malloc for storage resizing.
 * Switch from malloc to calloc?
