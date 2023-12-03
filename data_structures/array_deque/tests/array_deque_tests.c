@@ -5,7 +5,7 @@
 #include "unit_testing.h"
 
 static void test_add_and_remove_elements(void) {
-  ArrayDeque_r *array_deque = ArrayDeque_r_new();
+  ArrayDeque_r *array_deque = ArrayDeque_r_create();
   assert_true(ArrayDeque_r_count(array_deque) == 0, "ArrayDeque not empty.");
 
   int one = 1;
@@ -38,7 +38,7 @@ static void test_add_and_remove_elements(void) {
               "ArrayDeque remove first not 2");
   assert_true(ArrayDeque_r_count(array_deque) == 1, "ArrayDeque count not 1.");
 
-  ArrayDeque_r_free(array_deque);
+  ArrayDeque_r_destroy(array_deque);
 }
 
 static void test_capacity_changes_and_get_last(void) {

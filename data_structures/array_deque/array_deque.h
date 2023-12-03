@@ -1,33 +1,33 @@
-// TODO: Rename to something more general.
+#import <stdlib.h>
 
-// TODO: Rename new and free to create and destroy.
+// TODO: Rename to something more general.
 
 /** Declaration of the array deque type. */
 typedef struct ArrayDeque_r ArrayDeque_r;
 
 /** Allocates and returns a new empty array deque. */
-extern ArrayDeque_r* ArrayDeque_r_new(void);
+extern ArrayDeque_r* ArrayDeque_r_create(void);
 
 /** Frees the array deque. */
-extern void ArrayDeque_r_free(ArrayDeque_r* array_deque);
+extern void ArrayDeque_r_destroy(ArrayDeque_r* array_deque);
 
-/** Returns the number of elements in the array deque. */
-extern int ArrayDeque_r_count(ArrayDeque_r const* array_deque);
+/** Returns the number of items in the array deque. */
+extern size_t ArrayDeque_r_count(ArrayDeque_r* array_deque);
 
-/** Returns the element at a given index in the array deque, if it exists. */
-extern void const* ArrayDeque_r_get(ArrayDeque_r const* array_deque, int index);
+/** Returns the item at a given index in the array deque, if it exists. */
+extern void* ArrayDeque_r_get(ArrayDeque_r* array_deque, size_t index);
 
-/** Returns the last element in the array deque, if it exists. */
-extern void const* ArrayDeque_r_get_last(ArrayDeque_r const* array_deque);
+/** Returns the last item in the array deque, if it exists. */
+extern void* ArrayDeque_r_get_last(ArrayDeque_r* array_deque);
 
-/** Adds the passed-in element to the beginning of the array deque. */
-extern void ArrayDeque_r_prepend(ArrayDeque_r* array_deque, void const* element);
+/** Adds the passed-in item to the beginning of the array deque. */
+extern void ArrayDeque_r_prepend(ArrayDeque_r* array_deque, void* item);
 
-/** Adds the passed-in element to the end of the array deque. */
-extern void ArrayDeque_r_append(ArrayDeque_r* array_deque, void const* element);
+/** Adds the passed-in item to the end of the array deque. */
+extern void ArrayDeque_r_append(ArrayDeque_r* array_deque, void* item);
 
-/** Removes the first element from the array deque and returns it. */
-extern void const* ArrayDeque_r_remove_first(ArrayDeque_r* array_deque);
+/** Removes the first item from the array deque and returns it. */
+extern void* ArrayDeque_r_remove_first(ArrayDeque_r* array_deque);
 
-/** Removes the last element from the array deque and returns it. */
-extern void const* ArrayDeque_r_remove_last(ArrayDeque_r* array_deque);
+/** Removes the last item from the array deque and returns it. */
+extern void* ArrayDeque_r_remove_last(ArrayDeque_r* array_deque);
