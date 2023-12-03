@@ -7,61 +7,62 @@
 // TODO: Make all functions thread safe.
 
 struct Queue_r {
-  // TODO: Change to an "ArrayList_r" or something for storage.
-  void const** storage;
-  int storage_size;
-  int count;
-  int first_element_index;
+  // TODO: Change to an "ArrayList_r" or something for storage?
+  void** items_buffer;
+  size_t items_buffer_size;
+  size_t items_count;
+  size_t first_item_index;
 };
 
 #pragma mark - Public Functions
 
-Queue_r* Queue_r_new(void) {
-  Queue_r* q = malloc(sizeof(Queue_r));
-  int storage_size = 4;
+Queue_r* Queue_r_create(void) {
+  const size_t items_buffer_size = 4;
   // TODO: Delay allocation until first enqueue?
-  q->storage = malloc(storage_size * sizeof(void const*));
-  q->storage_size = storage_size;
-  q->count = 0;
-  q->first_element_index = 0;
+  Queue_r *q = malloc(sizeof(Queue_r));
+  // TODO: Request item size instead of void* size.
+  q->items_buffer = malloc(items_buffer_size * sizeof(void*));
+  q->items_buffer_size = items_buffer_size;
+  q->items_count = 0;
+  q->first_item_index = 0;
   return q;
 }
 
-void Queue_r_free(Queue_r* queue) {
-  free(queue->storage);
+void Queue_r_destroy(Queue_r* queue) {
+  free(queue->items_buffer);
   free(queue);
 }
 
-int Queue_r_count(Queue_r const* queue) {
-  return queue->count;
+size_t Queue_r_count(Queue_r const* queue) {
+  return queue->items_count;
 }
 
-void const* Queue_r_peek(Queue_r const* queue) {
-  if (queue->count == 0) {
-    return (void const*)0;
+void* Queue_r_peek(Queue_r const* queue) {
+  if (queue->items_count == 0) {
+    return (void*)0;
   }
-  return queue->storage[0];
+  return queue->items_buffer[0];
 }
 
-void Queue_r_enqueue(Queue_r* queue, void const* element) {
-  int current_count = queue->count;
-  queue->storage[current_count] = element;
-  queue->count++;
+void Queue_r_enqueue(Queue_r* queue, void* item) {
+  size_t current_count = queue->items_count;
+  queue->items_buffer[current_count] = item;
+  queue->items_count++;
 
   // TODO: Increase storage size if needed.
 }
 
-void const* Queue_r_dequeue(Queue_r* queue) {
-  if (queue->count == 0) {
-    return (void const*)0;
+void* Queue_r_dequeue(Queue_r* queue) {
+  if (queue->items_count == 0) {
+    return (void*)0;
   }
 
-  int first_element_index = queue->first_element_index;
-  void const* element = queue->storage[first_element_index];
-  queue->count--;
-  queue->first_element_index++;
+  size_t first_item_index = queue->first_item_index;
+  void* item = queue->items_buffer[first_item_index];
+  queue->items_count--;
+  queue->first_item_index++;
 
   // TODO: Decrease storage size if needed.
 
-  return element;
+  return item;
 }

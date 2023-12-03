@@ -7,7 +7,7 @@
 _Pragma("clang assume_nonnull begin")
 
 static void test_queue(void) {
-  Queue_r* queue = Queue_r_new();
+  Queue_r* queue = Queue_r_create();
   assert_true(Queue_r_count(queue) == 0, "Queue not empty.");
   assert_true(Queue_r_peek(queue) == 0, "Queue peek didn't return nil.");
   assert_true(Queue_r_dequeue(queue) == 0, "Queue dequeue didn't return nil.");
@@ -29,7 +29,7 @@ static void test_queue(void) {
   assert_true(Queue_r_peek(queue) == 0, "Queue peek didn't return nil.");
   assert_true(Queue_r_dequeue(queue) == 0, "Queue dequeue didn't return nil.");
 
-  Queue_r_free(queue);
+  Queue_r_destroy(queue);
 }
 
 int main() {
