@@ -33,11 +33,11 @@ void Queue_r_destroy(Queue_r* queue) {
   free(queue);
 }
 
-size_t Queue_r_count(Queue_r const* queue) {
+size_t Queue_r_count(Queue_r* queue) {
   return queue->items_count;
 }
 
-void* Queue_r_peek(Queue_r const* queue) {
+void* Queue_r_peek(Queue_r* queue) {
   if (queue->items_count == 0) {
     return (void*)0;
   }
@@ -49,7 +49,7 @@ void Queue_r_enqueue(Queue_r* queue, void* item) {
   queue->items_buffer[current_count] = item;
   queue->items_count++;
 
-  // TODO: Increase storage size if needed.
+  // TODO: Increase items_buffer size if needed.
 }
 
 void* Queue_r_dequeue(Queue_r* queue) {
@@ -62,7 +62,7 @@ void* Queue_r_dequeue(Queue_r* queue) {
   queue->items_count--;
   queue->first_item_index++;
 
-  // TODO: Decrease storage size if needed.
+  // TODO: Decrease items_buffer size if needed.
 
   return item;
 }
