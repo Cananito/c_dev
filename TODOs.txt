@@ -1,5 +1,12 @@
-* Refactor data structures so they're implementations that require typed layers.
-* Create "map" data structure (associative array, without hashing).
+* Refactor data structures so they're impls that require typed layers.
+  - Goal is to avoid struct allocation, only allocate underlying buffer.
+  - Try structs + function pointers.
+  - But more likely will need generic impls, with define wrappers for each type.
+  - Otherwise will need to continue with struct allocation.
+- Data Structures
+  * Create "array_map" (associative array, without hashing).
+  * Create "array_list".
+  * Create "hash_map".
 * Switch to size_t instead of int when applicable.
 * Figure out if ArrayDeque needs realloc or malloc for storage resizing.
 * Switch from malloc to calloc?
