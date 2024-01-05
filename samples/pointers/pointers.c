@@ -36,7 +36,7 @@ static void HeapPointers(void) {
   int a = 1;
   int* p1 = malloc(sizeof(int));
   *p1 = a;
-  printf("a: %d, *p1: %d, p1[0]: %d, *(p1 + 0): %d\n", a, *p1, p1[0], *(p1 + 0));
+  printf("a: %d, *p1: %d, p1[0]: %d, *(p1 + 0): %d, 0[p1]: %d\n", a, *p1, p1[0], *(p1 + 0), 0[p1]);
   printf("---\n");
   free(p1);
 
@@ -44,7 +44,7 @@ static void HeapPointers(void) {
   int b = 2;
   int* p2 = malloc(sizeof(int));
   p2[0] = b;
-  printf("b: %d, *p2: %d, p2[0]: %d, *(p2 + 0): %d\n", b, *p2, p2[0], *(p2 + 0));
+  printf("b: %d, *p2: %d, p2[0]: %d, *(p2 + 0): %d, 0[p2]: %d\n", b, *p2, p2[0], *(p2 + 0), 0[p2]);
   printf("---\n");
   free(p2);
 
@@ -52,7 +52,7 @@ static void HeapPointers(void) {
   int c = 3;
   int* p3 = calloc(1, sizeof(int));
   p3[0] = c;
-  printf("c: %d, *p3: %d, p3[0]: %d, *(p3 + 0): %d\n", c, *p3, p3[0], *(p3 + 0));
+  printf("c: %d, *p3: %d, p3[0]: %d, *(p3 + 0): %d, 0[p3]: %d\n", c, *p3, p3[0], *(p3 + 0), 0[p3]);
   printf("---\n");
   free(p3);
 
@@ -60,7 +60,7 @@ static void HeapPointers(void) {
   int d = 4;
   int* p4 = calloc(1, sizeof(int));
   *(p4 + 0) = d;
-  printf("d: %d, *p4: %d, p4[0]: %d, *(p4 + 0): %d\n", d, *p4, p4[0], *(p4 + 0));
+  printf("d: %d, *p4: %d, p4[0]: %d, *(p4 + 0): %d, 0[p4]: %d\n", d, *p4, p4[0], *(p4 + 0), 0[p4]);
   printf("---\n");
   free(p3);
 
