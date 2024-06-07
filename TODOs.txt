@@ -1,3 +1,7 @@
+* Switch to relative paths in includes.
+  - Then clangd can work without any compile file/database.
+* Check if -g is needed in all compilation commands to enable debugging.
+  - Will also need to delete <executable>.dSYM/ in the output dir.
 * Refactor data structures so they're impls that require typed layers.
   - Goal is to avoid struct allocation, only allocate underlying buffer.
   - Try structs + function pointers.
