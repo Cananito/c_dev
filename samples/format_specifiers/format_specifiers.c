@@ -8,6 +8,7 @@ static void Characters(void) {
 static void Strings(void) {
   char* a_string = "Hello";
   printf("%%s: %s (char*)\n", a_string);
+  printf("%%.*s: %.*s (char*, only first 4 characters)\n", 4, a_string);
 }
 
 static void Integers(void) {
