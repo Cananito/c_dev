@@ -8,7 +8,12 @@ static void Characters(void) {
 static void Strings(void) {
   char* a_string = "Hello";
   printf("%%s: %s (char*)\n", a_string);
-  printf("%%.*s: %.*s (char*, only first 4 characters)\n", 4, a_string);
+  printf("%%.*s: %.*s (4, char*)\n", 4, a_string);
+  printf("%%.*s: %.*s (9, char*)\n", 9, a_string);
+  printf("%%*.*s: %*.*s (15, 4, char*)\n", 15, 4, a_string);
+  printf("%%*.*s: %*.*s (15, 9, char*)\n", 15, 9, a_string);
+  // When using 9 for the precision size, it still only prints "Hello" because
+  // there is a \0 at the end.
 }
 
 static void Integers(void) {
