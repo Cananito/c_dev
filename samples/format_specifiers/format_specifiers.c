@@ -14,6 +14,19 @@ static void Strings(void) {
   printf("%%*.*s: %*.*s (15, 9, char*)\n", 15, 9, a_string);
   // When using 9 for the precision size, it still only prints "Hello" because
   // there is a \0 at the end.
+  char b_string[5];
+  b_string[0] = 'Y';
+  b_string[1] = 'o';
+  b_string[2] = 'y';
+  b_string[3] = 'o';
+  b_string[4] = '!';
+  printf("%%s: %s (char*)\n", b_string);
+  printf("%%.*s: %.*s (4, char*)\n", 4, b_string);
+  printf("%%.*s: %.*s (9, char*)\n", 9, b_string);
+  printf("%%*.*s: %*.*s (15, 4, char*)\n", 15, 4, b_string);
+  printf("%%*.*s: %*.*s (15, 9, char*)\n", 15, 9, b_string);
+  // In this case, because b_string isn't null terminated, junk is printed after
+  // "Yoyo!" when specifying 9 as precision size.
 }
 
 static void Integers(void) {
