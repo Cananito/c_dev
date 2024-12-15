@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include "zlib.h"
+#include <zlib.h>
 
 static void read_file(unsigned char* const file_content,
                       char const* const file_path,
