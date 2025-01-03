@@ -1,3 +1,4 @@
+* Update instructions to use -C instead of -f.
 * Switch to relative paths in includes.
   - Then clangd can work without any compile file/database.
 * Check if -g is needed in all compilation commands to enable debugging.
