@@ -11,7 +11,7 @@ int main(void) {
   printf("Address of array + 1: %lu\n", (size_t)(array + 1));
   // Get value by dereferencing, same as array[1]. Gives us 2.
   printf("Value of *(array + 1): %d\n", *(array + 1));
-  
+
   // Address of array as a whole.
   printf("Address of &array:     %lu\n", (size_t)(&array));
   // Increases by 20 bytes: 5 elements times int's size.
@@ -37,7 +37,7 @@ int main(void) {
   printf("Address of matrix[1] + 1: %lu\n", (size_t)(matrix[1] + 1));
   // Get value by dereferencing, same as matrix[1][1]. Gives us 7.
   printf("Value of *(matrix[1] + 1): %d\n", *(matrix[1] + 1));
-  
+
   // Address of 2nd row as a whole.
   printf("Address of &array[1]:     %lu\n", (size_t)(&matrix[1]));
   // Increases by 20 bytes: 5 elements times int's size.
