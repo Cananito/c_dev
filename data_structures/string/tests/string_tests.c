@@ -12,6 +12,7 @@ static void test_string_has_prefix(void) {
   size_t prefix_length = strlen(prefix_chars);
   struct String_r prefix = { .chars = prefix_chars, .length = prefix_length };
 
+  // TODO: Use assert_true from unit_test.h instead!!!
   if (String_r_has_prefix(string, prefix) == true) {
     printf("Tests failed.\n");
     exit(1);
