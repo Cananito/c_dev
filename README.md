@@ -1,4 +1,4 @@
-# computer_science
+# c_dev
 
 Collection of computer science libraries and executables written in C.
 
@@ -24,7 +24,3 @@ Collection of computer science libraries and executables written in C.
 ## Clean Instructions
 
 1. `make -f <path to Makefile> clean` to clean whatever test or program.
-
-## clangd Set-Up
-
-TODO
