@@ -1,24 +1,36 @@
+#include <signal.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-// TODO: Create non-init arrays with stack allocated items buffer.
-// (How to handle append and/or capacity increase?)
-
 static const int InitialBufferCapacity = 4;
 
-typedef struct {
+
+struct Int32List_r {
+  int32_t* items;
+  size_t length;
+  size_t capacity;
+};
+int32_t Int32List_r_get(struct Int32List_r list, size_t index) {
+  if (index >= 0 && index < list.length) {
+    return list.items[index];
+  }
+  raise(SIGTRAP);
+  return 0;
+}
+
+
+struct IntArray_r {
   int* items;
   size_t count;
   size_t capacity;
-} IntArray;
-
-static void IntArray_r_init(IntArray* int_array) {
+};
+static void IntArray_r_init(struct IntArray_r* int_array) {
   int_array->items = malloc(InitialBufferCapacity * sizeof(int));
   int_array->count = 0;
   int_array->capacity = InitialBufferCapacity;
 }
-
-static void IntArray_r_append(IntArray* int_array, int item) {
+static void IntArray_r_append(struct IntArray_r* int_array, int item) {
   size_t current_capacity = int_array->capacity;
   if (int_array->count >= current_capacity) {
     size_t new_capacity = current_capacity == 0 ?
@@ -29,37 +41,33 @@ static void IntArray_r_append(IntArray* int_array, int item) {
   int_array->items[int_array->count] = item;
   int_array->count++;
 }
-
-static void IntArray_r_free_items(IntArray* int_array) {
+static void IntArray_r_free_items(struct IntArray_r* int_array) {
   free(int_array->items);
 }
-
-static void IntArray_r_print(IntArray* int_array) {
+static void IntArray_r_print(struct IntArray_r* int_array) {
   if (int_array->count == 0) {
     printf("[ ]\n");
     return;
   }
   printf("[ ");
-  for (int i = 0; i < int_array->count; i++) {
+  for (size_t i = 0; i < int_array->count; i++) {
     printf("%d, ", int_array->items[i]);
   }
   printf("]\n");
 }
 
 
-typedef struct {
+struct FloatArray {
   float* items;
   size_t count;
   size_t capacity;
-} FloatArray;
-
-static void FloatArray_r_init(FloatArray* float_array) {
+};
+static void FloatArray_r_init(struct FloatArray* float_array) {
   float_array->items = malloc(InitialBufferCapacity * sizeof(int));
   float_array->count = 0;
   float_array->capacity = InitialBufferCapacity;
 }
-
-static void FloatArray_r_append(FloatArray* float_array, float item) {
+static void FloatArray_r_append(struct FloatArray* float_array, float item) {
   size_t current_capacity = float_array->capacity;
   if (float_array->count >= current_capacity) {
     size_t new_capacity = current_capacity == 0 ?
@@ -71,18 +79,16 @@ static void FloatArray_r_append(FloatArray* float_array, float item) {
   float_array->items[float_array->count] = item;
   float_array->count++;
 }
-
-static void FloatArray_r_free_items(FloatArray* float_array) {
+static void FloatArray_r_free_items(struct FloatArray* float_array) {
   free(float_array->items);
 }
-
-static void FloatArray_r_print(FloatArray* float_array) {
+static void FloatArray_r_print(struct FloatArray* float_array) {
   if (float_array->count == 0) {
     printf("[ ]\n");
     return;
   }
   printf("[ ");
-  for (int i = 0; i < float_array->count; i++) {
+  for (size_t i = 0; i < float_array->count; i++) {
     printf("%f, ", float_array->items[i]);
   }
   printf("]\n");
@@ -90,7 +96,15 @@ static void FloatArray_r_print(FloatArray* float_array) {
 
 
 int main(void) {
-  IntArray ia;
+  int i32l_items[5] = { 1, 2, 3, 4, 5 };
+  struct Int32List_r i32l = { .items = i32l_items, .length = 5, .capacity = 0 };
+  printf("Int32List_r_get 0: %d\n", Int32List_r_get(i32l, 0));
+  printf("Int32List_r_get 1: %d\n", Int32List_r_get(i32l, 1));
+  printf("Int32List_r_get 2: %d\n", Int32List_r_get(i32l, 2));
+  printf("Int32List_r_get 3: %d\n", Int32List_r_get(i32l, 3));
+  printf("Int32List_r_get 4: %d\n", Int32List_r_get(i32l, 4));
+
+  struct IntArray_r ia;
   IntArray_r_init(&ia);
   IntArray_r_append(&ia, 7);
   IntArray_r_append(&ia, 8);
@@ -98,7 +112,7 @@ int main(void) {
   IntArray_r_print(&ia);
   IntArray_r_free_items(&ia);
 
-  FloatArray fa;
+  struct FloatArray fa;
   FloatArray_r_init(&fa);
   FloatArray_r_append(&fa, 3.0);
   FloatArray_r_append(&fa, 4.0);
