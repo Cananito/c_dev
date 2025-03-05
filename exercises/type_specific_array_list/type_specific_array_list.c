@@ -25,12 +25,12 @@ struct IntArray_r {
   size_t count;
   size_t capacity;
 };
-static void IntArray_r_init(struct IntArray_r* int_array) {
+void IntArray_r_init(struct IntArray_r* int_array) {
   int_array->items = malloc(InitialBufferCapacity * sizeof(int));
   int_array->count = 0;
   int_array->capacity = InitialBufferCapacity;
 }
-static void IntArray_r_append(struct IntArray_r* int_array, int item) {
+void IntArray_r_append(struct IntArray_r* int_array, int item) {
   size_t current_capacity = int_array->capacity;
   if (int_array->count >= current_capacity) {
     size_t new_capacity = current_capacity == 0 ?
@@ -41,10 +41,10 @@ static void IntArray_r_append(struct IntArray_r* int_array, int item) {
   int_array->items[int_array->count] = item;
   int_array->count++;
 }
-static void IntArray_r_free_items(struct IntArray_r* int_array) {
+void IntArray_r_free_items(struct IntArray_r* int_array) {
   free(int_array->items);
 }
-static void IntArray_r_print(struct IntArray_r* int_array) {
+void IntArray_r_print(struct IntArray_r* int_array) {
   if (int_array->count == 0) {
     printf("[ ]\n");
     return;
@@ -62,12 +62,12 @@ struct FloatArray {
   size_t count;
   size_t capacity;
 };
-static void FloatArray_r_init(struct FloatArray* float_array) {
+void FloatArray_r_init(struct FloatArray* float_array) {
   float_array->items = malloc(InitialBufferCapacity * sizeof(int));
   float_array->count = 0;
   float_array->capacity = InitialBufferCapacity;
 }
-static void FloatArray_r_append(struct FloatArray* float_array, float item) {
+void FloatArray_r_append(struct FloatArray* float_array, float item) {
   size_t current_capacity = float_array->capacity;
   if (float_array->count >= current_capacity) {
     size_t new_capacity = current_capacity == 0 ?
@@ -79,10 +79,10 @@ static void FloatArray_r_append(struct FloatArray* float_array, float item) {
   float_array->items[float_array->count] = item;
   float_array->count++;
 }
-static void FloatArray_r_free_items(struct FloatArray* float_array) {
+void FloatArray_r_free_items(struct FloatArray* float_array) {
   free(float_array->items);
 }
-static void FloatArray_r_print(struct FloatArray* float_array) {
+void FloatArray_r_print(struct FloatArray* float_array) {
   if (float_array->count == 0) {
     printf("[ ]\n");
     return;
@@ -98,11 +98,7 @@ static void FloatArray_r_print(struct FloatArray* float_array) {
 int main(void) {
   int i32l_items[5] = { 1, 2, 3, 4, 5 };
   struct Int32List_r i32l = { .items = i32l_items, .length = 5, .capacity = 0 };
-  printf("Int32List_r_get 0: %d\n", Int32List_r_get(i32l, 0));
-  printf("Int32List_r_get 1: %d\n", Int32List_r_get(i32l, 1));
-  printf("Int32List_r_get 2: %d\n", Int32List_r_get(i32l, 2));
   printf("Int32List_r_get 3: %d\n", Int32List_r_get(i32l, 3));
-  printf("Int32List_r_get 4: %d\n", Int32List_r_get(i32l, 4));
   //printf("Int32List_r_get 7: %d\n", Int32List_r_get(i32l, 7));
 
   struct IntArray_r ia;
