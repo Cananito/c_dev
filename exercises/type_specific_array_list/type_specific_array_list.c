@@ -103,6 +103,7 @@ int main(void) {
   printf("Int32List_r_get 2: %d\n", Int32List_r_get(i32l, 2));
   printf("Int32List_r_get 3: %d\n", Int32List_r_get(i32l, 3));
   printf("Int32List_r_get 4: %d\n", Int32List_r_get(i32l, 4));
+  //printf("Int32List_r_get 7: %d\n", Int32List_r_get(i32l, 7));
 
   struct IntArray_r ia;
   IntArray_r_init(&ia);
