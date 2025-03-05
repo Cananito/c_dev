@@ -18,6 +18,17 @@ int32_t Int32List_r_get(struct Int32List_r list, size_t index) {
   raise(SIGTRAP);
   return 0;
 }
+void Int32List_r_print(struct Int32List_r list) {
+  if (list.length == 0) {
+    printf("[ ]\n");
+    return;
+  }
+  printf("[ ");
+  for (size_t i = 0; i < list.length; i++) {
+    printf("%d, ", list.items[i]);
+  }
+  printf("]\n");
+}
 
 
 struct IntArray_r {
@@ -98,8 +109,9 @@ void FloatArray_r_print(struct FloatArray* float_array) {
 int main(void) {
   int i32l_items[5] = { 1, 2, 3, 4, 5 };
   struct Int32List_r i32l = { .items = i32l_items, .length = 5, .capacity = 0 };
-  printf("Int32List_r_get 3: %d\n", Int32List_r_get(i32l, 3));
-  //printf("Int32List_r_get 7: %d\n", Int32List_r_get(i32l, 7));
+  printf("Int32List_r_get index 3: %d\n", Int32List_r_get(i32l, 3));
+  //printf("Int32List_r_get index 7: %d\n", Int32List_r_get(i32l, 7));
+  Int32List_r_print(i32l);
 
   struct IntArray_r ia;
   IntArray_r_init(&ia);
