@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 
+#if !defined(_POSIX_BARRIERS) || _POSIX_BARRIERS < 0
 /**
  * Sadly barriers are an optional part of the POSIX standard, and macOS is
  * missing it. The following is a basic, not optimal, and not fully compliant
@@ -51,6 +52,7 @@ int pthread_barrier_wait(pthread_barrier_t * barrier) {
     return 0;
   }
 }
+#endif // _POSIX_BARRIERS
 
 
 
