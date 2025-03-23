@@ -6,10 +6,8 @@
 
 static void* calculate(void* param) {
   int64_t result = (int64_t)param;
-  for (size_t i = 0; i < 3; i++) {
-    sleep(1);
-    result++;
-  }
+  sleep(1);
+  result += 3;
   return (void*)result;
 }
 
