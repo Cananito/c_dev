@@ -2,10 +2,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static void* calculate(void* param) {
   int64_t result = (int64_t)param;
-  for (size_t i = 0; i < 10000000; i++) {
+  for (size_t i = 0; i < 3; i++) {
+    sleep(1);
     result++;
   }
   return (void*)result;

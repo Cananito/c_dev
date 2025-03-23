@@ -1,5 +1,6 @@
 #include <pthread.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #if !defined(_POSIX_BARRIERS) || _POSIX_BARRIERS < 0
 /**
@@ -59,22 +60,20 @@ int pthread_barrier_wait(pthread_barrier_t * barrier) {
 static pthread_barrier_t barrier;
 
 static void* thread_func(void* param) {
-  size_t multiplier = (size_t)param;
+  size_t iterations = (size_t)param;
 
-  printf("thread_func with param %lu: Ready\n", multiplier);
+  printf("thread_func with param %lu: Ready\n", iterations);
   pthread_barrier_wait(&barrier);
 
-  printf("thread_func with param %lu: GO!!!!!!!!!!!!\n", multiplier);
-  size_t iterations = 100000 * multiplier;
-  size_t dummy_counter = 0;
+  printf("thread_func with param %lu: GO!!!!!!!!!!!!\n", iterations);
   for (size_t i = 0; i < iterations; i++) {
-    dummy_counter++;
+    sleep(1);
   }
-  printf("thread_func with param %lu: Finished!\n", multiplier);
+  printf("thread_func with param %lu: Finished!\n", iterations);
 
   pthread_barrier_wait(&barrier);
 
-  printf("thread_func with param %lu: Exiting.\n", multiplier);
+  printf("thread_func with param %lu: Exiting.\n", iterations);
   return NULL;
 }
 
