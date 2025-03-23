@@ -36,5 +36,11 @@ int main(void) {
     printf("NOT THE EXPECTED VALUE!\n");
   }
 
+  int destroy_error = pthread_mutex_destroy(&mutex);
+  if (destroy_error != 0) {
+    printf("Couldn't initialize the mutex.\n");
+    exit(EXIT_FAILURE);
+  }
+
   return 0;
 }
