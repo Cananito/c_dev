@@ -9,11 +9,23 @@ static sem_t* semaphore;
 
 static void* work(void* param) {
   int64_t id = (int64_t)param;
-  sem_wait(semaphore);
+
+  int wait_error = sem_wait(semaphore);
+  if (wait_error != 0) {
+    printf("Failed to wait on the samaphore!\n");
+    exit(EXIT_FAILURE);
+  }
+
   printf("Work ID %lld started...\n", id);
   sleep(3);
   printf("Work ID %lld finished...\n", id);
-  sem_post(semaphore);
+
+  int post_error = sem_post(semaphore);
+  if (post_error != 0) {
+    printf("Failed to post on the samaphore!\n");
+    exit(EXIT_FAILURE);
+  }
+
   return NULL;
 }
 
