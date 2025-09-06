@@ -1,9 +1,12 @@
 #include <stdio.h>
 
-int main(void) {
 // To get a list of all possible -std values, compile with a bogus value like:
 // gcc -std=c7 c_std_version.c
 
+// To get the default __STDC_VERSION__:
+// clang -dM -E - < /dev/null | grep __STDC_VERSION__
+
+int main(void) {
 #ifdef __STDC__
   printf("ANSI C / ISO C\n");
 #else
