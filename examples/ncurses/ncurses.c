@@ -6,13 +6,12 @@
 // $ ./ncurses
 
 int main() {
-  int y;
-  int x;
-
   WINDOW *window = initscr();
 
   printw("Hello, ncurses!");
 
+  int y;
+  int x;
   getmaxyx(window, y, x);
   char* middle_message = "Middle!";
   int middle_message_y = y / 2;
