@@ -32,21 +32,48 @@ static bool events_overlap(struct Event a, struct Event b) {
 }
 
 static struct Boxes event_boxes(struct Box* boxes_buffer, struct Events events, float container_width) {
-  // TODO: Implement algorithm!
+  // TODO: Sort events.buffer by event.start!
   float earliest_start_time = 0;
   if (events.count > 0) {
     earliest_start_time = events.buffer[0].start;
   }
-  for (size_t i = 0; i < events.count; i++) {
-    struct Event event = events.buffer[i];
-    float x = 0;
-    float y = event.start - earliest_start_time;
-    float width = container_width;
-    float height = event.end - event.start;
-    boxes_buffer[i] = (struct Box){ .x = x,
-                                    .y = y,
-                                    .width = width,
-                                    .height = height };
+  size_t i = 0;
+  while (i < events.count) {
+    size_t j = i;
+    while (j + 1 < events.count) {
+      struct Event curr_event = events.buffer[j];
+      struct Event next_event = events.buffer[j + 1];
+      if (!events_overlap(curr_event, next_event)) {
+        break;
+      }
+      j++;
+    }
+    if (j > i) {
+      size_t overlapping_events_count = (j - i) + 1;
+      float width = container_width / overlapping_events_count;
+      for (size_t k = 0; k < overlapping_events_count; k++) {
+        struct Event event = events.buffer[i];
+        float x = k * width;
+        float y = event.start - earliest_start_time;
+        float height = event.end - event.start;
+        boxes_buffer[i] = (struct Box){ .x = x,
+                                        .y = y,
+                                        .width = width,
+                                        .height = height };
+        i++;
+      }
+    } else {
+      struct Event event = events.buffer[i];
+      float x = 0;
+      float y = event.start - earliest_start_time;
+      float width = container_width;
+      float height = event.end - event.start;
+      boxes_buffer[i] = (struct Box){ .x = x,
+                                      .y = y,
+                                      .width = width,
+                                      .height = height };
+      i++;
+    }
   }
   return (struct Boxes){ .buffer = boxes_buffer, .count = events.count };
 }
