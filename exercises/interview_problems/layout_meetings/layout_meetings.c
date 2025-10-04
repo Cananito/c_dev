@@ -38,17 +38,24 @@ static int compare_events(const void* a, const void* b) {
   return event_a.start > event_b.start;
 }
 
-static void copy_events_buffer(struct Event* dest, struct Event const* src, size_t count) {
+static void copy_events_buffer(struct Event* dest,
+                               struct Event const* src,
+                               size_t count) {
   for (size_t i = 0; i < count; i++) {
     dest[i] = src[i];
   }
 }
 
-static struct Boxes event_boxes(struct Box* boxes_buffer, struct Events events, float container_width) {
+static struct Boxes event_boxes(struct Box* boxes_buffer,
+                                struct Events events,
+                                float container_width) {
   // Sort events by start time.
   struct Event* sorted_events_buffer = calloc(5, sizeof(struct Event));
   copy_events_buffer(sorted_events_buffer, events.buffer, events.count);
-  qsort(sorted_events_buffer, events.count, sizeof(struct Event), compare_events);
+  qsort(sorted_events_buffer,
+        events.count,
+        sizeof(struct Event),
+        compare_events);
 
   // Store earliest start time to later compute relative y's.
   float earliest_start_time = 0;
