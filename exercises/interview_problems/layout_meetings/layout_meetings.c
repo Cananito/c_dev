@@ -31,7 +31,7 @@ static bool events_overlap(struct Event a, struct Event b) {
   return a.start < b.end && a.end > b.start;
 }
 
-static int compare_events(const void* a, const void* b) {
+static int compare_events(void const* a, void const* b) {
   struct Event event_a = *((struct Event*)a);
   struct Event event_b = *((struct Event*)b);
   // Sorts in chronological order.
@@ -50,25 +50,26 @@ static struct Boxes event_boxes(struct Box* boxes_buffer,
                                 struct Events events,
                                 float container_width) {
   // Sort events by start time.
-  struct Event* sorted_events_buffer = calloc(5, sizeof(struct Event));
-  copy_events_buffer(sorted_events_buffer, events.buffer, events.count);
+  size_t const events_count = events.count;
+  struct Event* sorted_events_buffer = calloc(events_count, sizeof(struct Event));
+  copy_events_buffer(sorted_events_buffer, events.buffer, events_count);
   qsort(sorted_events_buffer,
-        events.count,
+        events_count,
         sizeof(struct Event),
         compare_events);
 
   // Store earliest start time to later compute relative y's.
   float earliest_start_time = 0;
-  if (events.count > 0) {
+  if (events_count > 0) {
     earliest_start_time = sorted_events_buffer[0].start;
   }
 
   // Loop over the sorted events.
   size_t i = 0;
-  while (i < events.count) {
+  while (i < events_count) {
     // Inner loop to gather the next group of overlapping events.
     size_t j = i;
-    while (j + 1 < events.count) {
+    while (j + 1 < events_count) {
       struct Event curr_event = sorted_events_buffer[j];
       struct Event next_event = sorted_events_buffer[j + 1];
       if (!events_overlap(curr_event, next_event)) {
@@ -106,7 +107,7 @@ static struct Boxes event_boxes(struct Box* boxes_buffer,
     }
   }
   free(sorted_events_buffer);
-  return (struct Boxes){ .buffer = boxes_buffer, .count = events.count };
+  return (struct Boxes){ .buffer = boxes_buffer, .count = events_count };
 }
 
 static void print_boxes(struct Boxes boxes) {
@@ -121,7 +122,8 @@ static void print_boxes(struct Boxes boxes) {
 }
 
 int main() {
-  struct Event* events_buffer = calloc(5, sizeof(struct Event));
+  #define EVENT_COUNT 5
+  struct Event events_buffer[EVENT_COUNT] = { 0 };
   // Creating events in chronological order to more easily visualize them, but
   // appending them unsorted to verify event_boxes()'s sorting functionality.
   events_buffer[0] = (struct Event){ .start = 0, .end = 60 };
@@ -129,11 +131,9 @@ int main() {
   events_buffer[4] = (struct Event){ .start = 70, .end = 120 };
   events_buffer[1] = (struct Event){ .start = 100, .end = 120 };
   events_buffer[3] = (struct Event){ .start = 120, .end = 150 };
-  struct Events events = { .buffer = events_buffer, .count = 5 };
-  struct Box* boxes_buffer = calloc(5, sizeof(struct Box));
+  struct Events events = { .buffer = events_buffer, .count = EVENT_COUNT };
+  struct Box boxes_buffer[EVENT_COUNT] = { 0 };
   struct Boxes boxes = event_boxes(boxes_buffer, events, 100);
   print_boxes(boxes);
-  free(events_buffer);
-  free(boxes_buffer);
   return 0;
 }
