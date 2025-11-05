@@ -42,7 +42,9 @@ static void copy_events_buffer(struct Event* dest,
                                struct Event const* src,
                                size_t count) {
   for (size_t i = 0; i < count; i++) {
-    dest[i] = src[i];
+    *dest = *src;
+    dest++;
+    src++;
   }
 }
 
