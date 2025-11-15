@@ -12,8 +12,8 @@ struct Box {
 };
 
 struct Boxes {
-  struct Box const* const buffer;
-  size_t const count;
+  struct Box const* buffer;
+  size_t count;
 };
 
 struct Event {
@@ -22,8 +22,8 @@ struct Event {
 };
 
 struct Events {
-  struct Event const* const buffer;
-  size_t const count;
+  struct Event const* buffer;
+  size_t count;
 };
 
 static bool events_overlap(struct Event a, struct Event b) {
@@ -32,8 +32,8 @@ static bool events_overlap(struct Event a, struct Event b) {
 }
 
 static int compare_events(void const* a, void const* b) {
-  struct Event event_a = *((struct Event*)a);
-  struct Event event_b = *((struct Event*)b);
+  struct Event const event_a = *((struct Event*)a);
+  struct Event const event_b = *((struct Event*)b);
   // Sorts in chronological order.
   return event_a.start > event_b.start;
 }
@@ -50,10 +50,11 @@ static void copy_events_buffer(struct Event* dest,
 
 static struct Boxes event_boxes(struct Box* boxes_buffer,
                                 struct Events events,
-                                float container_width) {
+                                 float container_width) {
   // Sort events by start time.
   size_t const events_count = events.count;
-  struct Event* sorted_events_buffer = calloc(events_count, sizeof(struct Event));
+  struct Event* const sorted_events_buffer = calloc(events_count,
+                                                    sizeof(struct Event));
   copy_events_buffer(sorted_events_buffer, events.buffer, events_count);
   qsort(sorted_events_buffer,
         events_count,
@@ -72,8 +73,8 @@ static struct Boxes event_boxes(struct Box* boxes_buffer,
     // Inner loop to gather the next group of overlapping events.
     size_t j = i;
     while (j + 1 < events_count) {
-      struct Event curr_event = sorted_events_buffer[j];
-      struct Event next_event = sorted_events_buffer[j + 1];
+      struct Event const curr_event = sorted_events_buffer[j];
+      struct Event const next_event = sorted_events_buffer[j + 1];
       if (!events_overlap(curr_event, next_event)) {
         break;
       }
@@ -82,13 +83,14 @@ static struct Boxes event_boxes(struct Box* boxes_buffer,
 
     // If there are overlapping events, process those in another inner loop.
     if (j > i) {
-      size_t overlapping_events_count = (j - i) + 1;
-      float overlapping_event_with = container_width / overlapping_events_count;
+      size_t const overlapping_events_count = (j - i) + 1;
+      float const overlapping_event_with =
+          container_width / overlapping_events_count;
       for (size_t k = 0; k < overlapping_events_count; k++) {
-        struct Event event = sorted_events_buffer[i];
-        float x = k * overlapping_event_with;
-        float y = event.start - earliest_start_time;
-        float height = event.end - event.start;
+        struct Event const event = sorted_events_buffer[i];
+        float const x = k * overlapping_event_with;
+        float const y = event.start - earliest_start_time;
+        float const height = event.end - event.start;
         boxes_buffer[i] = (struct Box){ .x = x,
                                         .y = y,
                                         .width = overlapping_event_with,
@@ -96,11 +98,11 @@ static struct Boxes event_boxes(struct Box* boxes_buffer,
         i++;
       }
     } else { // Otehrwise process the single next event.
-      struct Event event = sorted_events_buffer[i];
-      float x = 0;
-      float y = event.start - earliest_start_time;
-      float width = container_width;
-      float height = event.end - event.start;
+      struct Event const event = sorted_events_buffer[i];
+      float const x = 0;
+      float const y = event.start - earliest_start_time;
+      float const width = container_width;
+      float const height = event.end - event.start;
       boxes_buffer[i] = (struct Box){ .x = x,
                                       .y = y,
                                       .width = width,
@@ -114,7 +116,7 @@ static struct Boxes event_boxes(struct Box* boxes_buffer,
 
 static void print_boxes(struct Boxes boxes) {
   for (size_t i = 0; i < boxes.count; i++) {
-    struct Box box = boxes.buffer[i];
+    struct Box const box = boxes.buffer[i];
     printf("Box { .x = %f, .y = %f, .width = %f, .height = %f }\n",
            box.x,
            box.y,
@@ -133,9 +135,9 @@ int main() {
   events_buffer[4] = (struct Event){ .start = 70, .end = 120 };
   events_buffer[1] = (struct Event){ .start = 100, .end = 120 };
   events_buffer[3] = (struct Event){ .start = 120, .end = 150 };
-  struct Events events = { .buffer = events_buffer, .count = EVENT_COUNT };
+  struct Events const events = { .buffer = events_buffer, .count = EVENT_COUNT };
   struct Box boxes_buffer[EVENT_COUNT] = { 0 };
-  struct Boxes boxes = event_boxes(boxes_buffer, events, 100);
+  struct Boxes const boxes = event_boxes(boxes_buffer, events, 100);
   print_boxes(boxes);
   return 0;
 }
