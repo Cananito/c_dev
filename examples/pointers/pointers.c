@@ -81,9 +81,78 @@ static void HeapDoublePointers(void) {
   free(pp);
 }
 
+static void PointerArithmeticVsArraySyntax(void) {
+  printf("---PointerArithmaticVsArraySyntax---\n");
+  struct Person {
+    int age;
+    int level;
+  };
+
+  struct Person people_array[3];
+  struct Person* people_pointer = people_array;
+  struct Person* ppc = people_pointer;
+
+  // Populate using array syntax.
+  for (int i = 0; i < 3; i++) {
+    people_array[i].age = i;
+    people_array[i].level = i;
+  }
+
+  // Print using all syntaxes for access.
+  ppc = people_pointer;
+  for (int i = 0; i < 3; i++) {
+    struct Person pa = people_array[i];
+    printf("  pa.age: %d,   pa.level: %d\n", pa.age, pa.level);
+    struct Person pp = *(people_pointer + i);
+    printf("  pp.age: %d,   pp.level: %d\n", pp.age, pp.level);
+    printf("ppc->age: %d, ppc->level: %d\n", ppc->age, ppc->level);
+    ppc++;
+  }
+  printf("--\n");
+
+  // Populate using pointer arithmetic syntax and dereferencing with *.
+  for (int i = 0; i < 3; i++) {
+    (*(people_pointer + i)).age = i * 2;
+    (*(people_pointer + i)).level = i * 2;
+  }
+
+  // Print using all syntaxes for access.
+  ppc = people_pointer;
+  for (int i = 0; i < 3; i++) {
+    struct Person pa = people_array[i];
+    printf("  pa.age: %d,   pa.level: %d\n", pa.age, pa.level);
+    struct Person pp = *(people_pointer + i);
+    printf("  pp.age: %d,   pp.level: %d\n", pp.age, pp.level);
+    printf("ppc->age: %d, ppc->level: %d\n", ppc->age, ppc->level);
+    ppc++;
+  }
+  printf("--\n");
+
+  // Populate using pointer arithmetic syntax and dereferencing with ->.
+  for (int i = 0; i < 3; i++) {
+    (people_pointer + i)->age = i * 3;
+    (people_pointer + i)->level = i * 3;
+  }
+
+  // Print using all syntaxes for access.
+  ppc = people_pointer;
+  for (int i = 0; i < 3; i++) {
+    struct Person pa = people_array[i];
+    printf("  pa.age: %d,   pa.level: %d\n", pa.age, pa.level);
+    struct Person pp = *(people_pointer + i);
+    printf("  pp.age: %d,   pp.level: %d\n", pp.age, pp.level);
+    printf("ppc->age: %d, ppc->level: %d\n", ppc->age, ppc->level);
+    ppc++;
+  }
+  printf("--\n");
+
+  printf("---\n");
+}
+
 int main(void) {
   StackPointers();
   HeapPointers();
   HeapDoublePointers();
+  PointerArithmeticVsArraySyntax();
   return 0;
 }

@@ -2,7 +2,7 @@
 
 static void Const(void) {
   printf("---Const---\n");
-  const int a = 1; // Same as `int const`.
+  int const a = 1; // Same as `const int`.
   // a = 2; // Can't re-assign a.
   printf(" a: %d\n", a);
   printf("---\n");
@@ -143,14 +143,92 @@ static void PointerToConstantPointerToConstant(void) {
 
 static void PointerToVariableDeclaredAsConst(void) {
   printf("---Pointer to variable declared as const---\n");
-  const int a = 1;
+  int const a = 1;
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wincompatible-pointer-types-discards-qualifiers"
   int* p = &a; // Compiler warning (-Wincompatible-pointer-types-discards-qualifiers).
+  #pragma clang diagnostic pop
   printf("*p: %d\n", *p);
   printf(" a: %d\n", a);
   *p = 2; // Shady!
   printf("*p: %d\n", *p); // 2 (changes)
   printf(" a: %d\n", a); // 1 (doesn't change)
   // Clang behavior. Unclear whether all compilers behave the same way.
+  printf("---\n");
+}
+
+struct ConstantFields {
+  int const age;
+  char const* const initials;
+};
+
+struct NonConstantFieldsButConstantPointer {
+  int age;
+  char const* initials;
+};
+
+struct NonConstantFields {
+  int age;
+  char* initials;
+};
+
+static void ConstantStructWithConstantFields(void) {
+  printf("---Constant struct with constant fields---\n");
+  char const i[2] = { 'R', 'G' };
+  struct ConstantFields const structo;
+  // structo.age = 7; // Can't assign.
+  // structo.initials = i; // Can't assign.
+  // structo.initials[0] = 'A'; // Can't assign.
+  printf("---\n");
+}
+
+static void NonConstantStructWithConstantFields(void) {
+  printf("---Non constant struct with constant fields---\n");
+  char const i[2] = { 'R', 'G' };
+  struct ConstantFields structo;
+  // structo.age = 7; // Can't assign.
+  // structo.initials = i; // Can't assign.
+  // structo.initials[0] = 'A'; // Can't assign.
+  printf("---\n");
+}
+
+static void ConstantStructWithNonConstantFieldsButConstantPointer(void) {
+  printf("---Constant struct with non constant fields but constant pointer---\n");
+  char const i[2] = { 'R', 'G' };
+  struct NonConstantFieldsButConstantPointer const structo;
+  // structo.age = 7; // Can't assign.
+  // structo.initials = i; // Can't assign.
+  // structo.initials[0] = 'A'; // Can't assign.
+  printf("---\n");
+}
+
+static void NonConstantStructWithNonConstantFieldsButConstantPointer(void) {
+  printf("---Constant struct with non constant fields but constant pointer---\n");
+  char const i[2] = { 'R', 'G' };
+  struct NonConstantFieldsButConstantPointer structo;
+  structo.age = 7;
+  structo.initials = i;
+  // structo.initials[0] = 'A'; // Can't assign.
+  printf("---\n");
+}
+
+static void ConstantStructWithNonConstantFields(void) {
+  printf("---Constant struct with non constant fields---\n");
+  char const i[2] = { 'R', 'G' };
+  struct NonConstantFields const structo;
+  // structo.age = 7; // Can't assign.
+  // structo.initials = i; // Can't assign.
+  structo.initials[0] = 'A';
+  printf("---\n");
+}
+
+static void NonConstantStructWithNonConstantFields(void) {
+  printf("---Non constant struct with non constant fields---\n");
+  char i[2] = { 'R', 'G' };
+  struct NonConstantFields structo;
+  structo.age = 7;
+  structo.initials = i;
+  structo.initials[0] = 'A';
   printf("---\n");
 }
 
@@ -167,6 +245,10 @@ int main(void) {
   PointerToConstantPointerToConstant();
 
   PointerToVariableDeclaredAsConst();
+
+  ConstantStructWithNonConstantFields();
+  ConstantStructWithConstantFields();
+  NonConstantStructWithConstantFields();
 
   return 0;
 }
