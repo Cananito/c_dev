@@ -232,6 +232,22 @@ static void NonConstantStructWithNonConstantFields(void) {
   printf("---\n");
 }
 
+static void NestedConstantStruct(void) {
+  struct Foo {
+    int a;
+    struct Bar {
+      int drinks;
+    } b;
+  };
+
+  struct Bar const b;
+  struct Foo const f;
+  // f.a = 1; // Can't assign.
+  // f.b = b; // Can't assign.
+  // f.b.drinks = 7; // Can't assign.
+  printf("---\n");
+}
+
 int main(void) {
   Const();
 
@@ -249,6 +265,7 @@ int main(void) {
   ConstantStructWithNonConstantFields();
   ConstantStructWithConstantFields();
   NonConstantStructWithConstantFields();
+  NestedConstantStruct();
 
   return 0;
 }
